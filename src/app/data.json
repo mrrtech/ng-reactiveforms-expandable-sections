@@ -1,0 +1,16 @@
+{
+    "jobOptions":[
+        {
+            "value":"IT Professional",
+            "name":"IT"
+        },
+        {
+            "value":"Data Scientist",
+            "name":"IT"
+        },
+        {
+            "value":"Receptionist",
+            "name":"Front Office"
+        }
+    ]
+}

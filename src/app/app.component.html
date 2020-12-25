@@ -91,21 +91,37 @@
                     <p-accordionTab header="SECTION-1" [selected]="sectionOneButtonDisabled" [disabled]="!sectionOneButtonDisabled">
                       <div class="row">
                         <div class="col-6">
-                          <p>Hello Section 1</p>
+                          <input
+                          type="text"
+                          class="form-control"
+                          id="section1"
+                          type="text"
+                          placeholder="Section1 (required)"
+                          formControlName="sectionOne"
+                          [ngClass]="{
+                            'is-invalid':
+                              (createForm.get('sectionOne').touched ||
+                              createForm.get('sectionOne').dirty) &&
+                              !createForm.get('sectionOne').valid
+                          }"
+                          />
+                          <span class="invalid-feedback">
+                            <span *ngIf="createForm.get('sectionOne').errors?.required">
+                              Please enter client name.
+                            </span>
+                          </span>
                         </div>
-                        <div class="col-6">
-                          <p>Hello Section1</p>
-                        </div>
+                        
                       </div>
                     </p-accordionTab>
                   </p-accordion>
                 </div>
               </div>
               <div class="col-2">
-                <button class="btn float-right" title="Remove Section1" [disabled]="!sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',false)">
+                <button class="btn btn-primary float-right ml-2" title="Remove Section1" [disabled]="!sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',false)">
                   Remove
-                </button>
-                <button class="btn float-right" title="Add Section1" [disabled]="sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',true)">
+                </button>&nbsp;
+                <button class="btn btn-primary float-right" title="Add Section1" [disabled]="sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',true)">
                   Add
                 </button>
               </div>
@@ -117,25 +133,83 @@
                     <p-accordionTab header="SECTION-2" [selected]="sectionTwoButtonDisabled" [disabled]="!sectionTwoButtonDisabled">
                       <div class="row">
                         <div class="col-6">
-                          <p>Hello Section2</p>
+                          <input
+                          type="text"
+                          class="form-control"
+                          id="sectionTwo"
+                          type="text"
+                          placeholder="SectionTwoData (required)"
+                          formControlName="sectionTwo"
+                          [ngClass]="{
+                            'is-invalid':
+                              (createForm.get('sectionTwo').touched ||
+                              createForm.get('sectionTwo').dirty) &&
+                              !createForm.get('sectionTwo').valid
+                          }"
+                          />
+                          <span class="invalid-feedback">
+                            <span *ngIf="createForm.get('sectionTwo').errors?.required">
+                              Please enter client name.
+                            </span>
+                          </span>
                         </div>
-                        <div class="col-6">
-                          <p>Hello Section2</p>
-                        </div>
+                        
                       </div>
                     </p-accordionTab>
                   </p-accordion>
                 </div>
               </div>
               <div class="col-2">
-                <button class="btn float-right" title="Remove Section2" [disabled]="!sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',false)">
+                <button class="btn btn-primary float-right ml-2" title="Remove Section2" [disabled]="!sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',false)">
                   Remove
                 </button>
-                <button class="btn float-right" title="Add Section2" [disabled]="sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',true)">
+                <button class="btn btn-primary float-right" title="Add Section2" [disabled]="sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',true)">
                   Add
                 </button>
               </div>
             </div>
+
+            <!-- Dynamic Fields-->
+            <div class="row">
+              <div class="col-10">
+                <div class="form-group">
+                  <p-accordion>
+                    <p-accordionTab header="SECTION-3" [selected]="sectionThreeButtonDisabled" [disabled]="!sectionThreeButtonDisabled">
+                      <div formArrayName="jobsList" *ngFor="let job of jobsListGroup.controls; let i=index;">
+                          <div class="row" [formGroupName]="i">
+                            <div class="col-6">
+                              <label for="jobList" class="col-md-6 col-form-label">Jobs List</label>
+                              <select class="form-control" id="jobsList" formControlName="jobName">
+                                <option value="" selected>Select Job</option>
+                                <option value="{{option.value}}" *ngFor="let option of jobOptions">{{option.name}}</option>
+                              </select>
+                            </div>
+                            <div class="col-2" style="margin-top:35px;">
+                              <button class="btn btn-danger float-right" title="delete" (click)="deleteJobList(i)"><i class="fa-fa-window-close"></i>Delete</button>
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                          </div>
+                     </div><hr>
+                      <div class="row p-3">
+                        <button class="btn btn-primary float-right" (click)="addJobList()">Add JobList</button>
+                      </div>
+                    </p-accordionTab>
+                  </p-accordion>
+                </div>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary float-right ml-2" title="Remove Section3" [disabled]="!sectionThreeButtonDisabled" (click)="sectionAddRemove('Section-3',false)">
+                  Remove
+                </button>
+                <button class="btn btn-primary float-right" title="Add Section3" [disabled]="sectionThreeButtonDisabled" (click)="sectionAddRemove('Section-3',true)">
+                  Add
+                </button>
+              </div>
+            </div>
+
+            
             <div class="row">
               <div class="col-6">
                 <button class="btn btn-primary float-left" type="reset" (click)="resetForm()">
