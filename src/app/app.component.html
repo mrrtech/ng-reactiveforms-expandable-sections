@@ -1,0 +1,162 @@
+<div class="pt-4 pl-5 mb-3">
+  <div class="row">
+    <div class="col col-sm-12 pr-5">
+      <div class="card bg-light mb-3 shadow">
+        <div class="card-header">
+          <strong>{{ title }}</strong>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="createForm" autocomplete="off" novalidate>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="clientId"
+                      type="text"
+                      placeholder="Client ID (required)"
+                      formControlName="clientId"
+                      [ngClass]="{
+                        'is-invalid':
+                          (createForm.get('clientId').touched ||
+                          createForm.get('clientId').dirty) &&
+                          !createForm.get('clientId').valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="createForm.get('clientId').errors?.required">
+                        Please enter client id.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="clientName"
+                      type="text"
+                      placeholder="Client Name (required)"
+                      formControlName="clientName"
+                      [ngClass]="{
+                        'is-invalid':
+                          (createForm.get('clientName').touched ||
+                          createForm.get('clientName').dirty) &&
+                          !createForm.get('clientName').valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="createForm.get('clientName').errors?.required">
+                        Please enter client name.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <div class="col-md-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mobile"
+                      type="text"
+                      placeholder="xxx xxx-xxxx" appPhonemask
+                      formControlName="mobile"
+                      [ngClass]="{
+                        'is-invalid':
+                          (createForm.get('mobile').touched ||
+                          createForm.get('mobile').dirty) &&
+                          !createForm.get('mobile').valid
+                      }"
+                    />
+                    <span class="invalid-feedback">
+                      <span *ngIf="createForm.get('mobile').errors?.required">
+                        Please enter mobile no.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <div class="form-group">
+                  <p-accordion>
+                    <p-accordionTab header="SECTION-1" [selected]="sectionOneButtonDisabled" [disabled]="!sectionOneButtonDisabled">
+                      <div class="row">
+                        <div class="col-6">
+                          <p>Hello Section 1</p>
+                        </div>
+                        <div class="col-6">
+                          <p>Hello Section1</p>
+                        </div>
+                      </div>
+                    </p-accordionTab>
+                  </p-accordion>
+                </div>
+              </div>
+              <div class="col-2">
+                <button class="btn float-right" title="Remove Section1" [disabled]="!sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',false)">
+                  Remove
+                </button>
+                <button class="btn float-right" title="Add Section1" [disabled]="sectionOneButtonDisabled" (click)="sectionAddRemove('Section-1',true)">
+                  Add
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <div class="form-group">
+                  <p-accordion>
+                    <p-accordionTab header="SECTION-2" [selected]="sectionTwoButtonDisabled" [disabled]="!sectionTwoButtonDisabled">
+                      <div class="row">
+                        <div class="col-6">
+                          <p>Hello Section2</p>
+                        </div>
+                        <div class="col-6">
+                          <p>Hello Section2</p>
+                        </div>
+                      </div>
+                    </p-accordionTab>
+                  </p-accordion>
+                </div>
+              </div>
+              <div class="col-2">
+                <button class="btn float-right" title="Remove Section2" [disabled]="!sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',false)">
+                  Remove
+                </button>
+                <button class="btn float-right" title="Add Section2" [disabled]="sectionTwoButtonDisabled" (click)="sectionAddRemove('Section-2',true)">
+                  Add
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <button class="btn btn-primary float-left" type="reset" (click)="resetForm()">
+                  CLEAR
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-primary float-right" type="submit" [disabled]="!createForm.valid" (click)="submitForm()">
+                  SUBMIT
+              </button>
+            </div>
+            </div>
+            <p-confirmDialog appendTo="body" header="Confirmation" icon="fa fa-question-circle" width="425" height="425" #cd > 
+              <p-footer>
+                <button type="button" class="btn btn-danger"  icon="fa fa-close" label="No" (click)="cd.reject()">No</button>
+                <button type="button" class="btn btn-success"  icon="fa fa-check" label="Yes" (click)="cd.accept()">Yes</button>
+              </p-footer>
+            </p-confirmDialog>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
